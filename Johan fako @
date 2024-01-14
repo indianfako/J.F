@@ -1,0 +1,30 @@
+# Importovanie modulu smtplib na odosielanie e-mailov
+import smtplib
+
+# Nastavenie premenných pre e-mailovú adresu, heslo a SMTP server
+email = "vasa_adresa@gmail.com"
+password = "vasa_heslo"
+server = "smtp.gmail.com"
+
+# Vytvorenie SMTP objektu a pripojenie sa na server
+smtp = smtplib.SMTP(server, 587)
+smtp.ehlo()
+smtp.starttls()
+smtp.ehlo()
+
+# Prihlásenie sa na server pomocou e-mailovej adresy a hesla
+smtp.login(email, password)
+
+# Vytvorenie e-mailovej správy s odosielateľom, príjemcom, predmetom a telom
+message = f"""From: {email}
+To: nova_adresa@gmail.com
+Subject: Vitajte!
+
+Toto je váš nový e-mailový účet. Prajem vám veľa šťastia a úspechov!
+"""
+
+# Odoslanie e-mailovej správy
+smtp.sendmail(email, "nova_adresa@gmail.com", message)
+
+# Odpojenie sa od servera
+smtp.quit()
